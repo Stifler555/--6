@@ -16,28 +16,37 @@
 
 
 
-from time import sleep
+from time import sleepimport itertools
+import time
 
 
 class TrafficLight:
-    __color = ['Красный', 'Желтый', 'Зеленый']
+    __color: str
+    __timing: dict
+    
+    def __init__(self, red_time: int = 7, yellow_time: int = 2, green_time: int = 5):
+        self.__timing = {
+            "red": red_time
+            "yellow": yellow_time
+            "green": green_time
+        }
 
     def running(self):
-        i = 0
-        while i < 3:
-            print(f'Светофор переключается \n '
-                  f'{TrafficLight.__color[i]}')
-            if i == 0:
-                sleep(7)
-            elif i == 1:
-                sleep(5)
-            elif i == 2:
-                sleep(3)
-            i += 1
-
-
-TrafficLight = TrafficLight()
-TrafficLight.running()
+       for mode, timer in intertools.cycle(self.__timing.items()):
+            self.__color = mode
+            
+            for socond in range(timer):
+                print(f"{self} [{second + 1}]")
+                time.sleep(1)
+                
+    def __repr__(self):
+        return f"Текущий режим = {self.__color}"
+    
+try:
+    traffic_light = TrafficLight(7, 2, 5)
+    traffic_light.running()
+except KeyboardInterrupt:
+    print("Exit the program")
 
 
 
