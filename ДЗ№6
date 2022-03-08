@@ -149,84 +149,61 @@ PoliceCar. Добавьте в базовый класс метод show_speed, 
 
 
 class Car:
-    # atributes
-    def __init__(self, speed, color, name, is_police):
+    speed: int
+    color: str
+    name: str
+    is_police: bool = False
+
+    def __init__(self, speed: int, color: str, name: str) -> None:
         self.speed = speed
         self.color = color
         self.name = name
-        self.is_police = is_police
 
-    # methods
     def go(self):
-        return f'{self.name} is started'
+        print (f"{self.name}: старт")
 
     def stop(self):
-        return f'{self.name} is stopped'
+        print (f"{self.name}: стоп")
 
-    def turn_right(self):
-        return f'{self.name} is turned right'
-
-    def turn_left(self):
-        return f'{self.name} is turned left'
+    def turn(self):
+        print (f"{self.name}: поворот - {direction}")
 
     def show_speed(self):
-        return f'Current speed {self.name} is {self.speed}'
+         print (f"{self.name}: скорость = {self.speed} км/ч")
 
 
 class TownCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
-
     def show_speed(self):
-        print(f'Current speed of town car {self.name} is {self.speed}')
-
-        if self.speed > 40:
-            return f'Speed of {self.name} is higher than allow for town car'
-        else:
-            return f'Speed of {self.name} is normal for town car'
+        super().show_speed()
+        if self.speed > 60:
+            print(f"{self.name}: повышение скорости")
 
 class SportCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
-
+    pass
 
 class WorkCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
-
     def show_speed(self):
-        print(f'Current speed of work car {self.name} is {self.speed}')
-
-        if self.speed > 60:
-            return f'Speed of {self.name} is higher than allow for work car'
-
+        super().show_speed()
+        if self.speed > 40:
+            print(f"{self.name}: превышение скорости")
 
 class PoliceCar(Car):
-    def __init__(self, speed, color, name, is_police):
-        super().__init__(speed, color, name, is_police)
-
-    def police(self):
-        if self.is_police:
-            return f'{self.name} is from police department'
-        else:
-            return f'{self.name} is not from police department'
+    is_police: bool = True
 
 
-audi = SportCar(100, 'Red', 'Audi', False)
-oka = TownCar(30, 'White', 'Oka', False)
-lada = WorkCar(70, 'Rose', 'Lada', True)
-ford = PoliceCar(110, 'Blue',  'Ford', True)
-print(lada.turn_left())
-print(f'When {oka.turn_right()}, then {audi.stop()}')
-print(f'{lada.go()} with speed exactly {lada.show_speed()}')
-print(f'{lada.name} is {lada.color}')
-print(f'Is {audi.name} a police car? {audi.is_police}')
-print(f'Is {lada.name}  a police car? {lada.is_police}')
-print(audi.show_speed())
-print(oka.show_speed())
-print(ford.police())
-print(ford.show_speed())
+cars = [
+    SportCar(240, 'Red', 'Audi'),
+    TownCar(180, 'White', 'Oka'),
+    WorkCar(70, 'Rose', 'Lada'),
+    PoliceCar(170, 'Blue',  'Ford'),
+]
 
+cars[0].go()
+cars[0].turn("направо")
+cars[0].stop()
+
+for car in cars:
+    car.show_speed()
 
 
 
