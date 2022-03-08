@@ -64,24 +64,22 @@ length (длина), width (ширина).
 Например: 20м*5000м*25кг*5см = 12500 т
 
 
-
 class Road:
-    def __init__(self, _length, _width):
-        self._length = _length
-        self._width = _width
+    __mass: float = 25.0
+    _length: float
+    _width: float
+    
+    def __init__(self, length: float, width: float):
+        self._length = length
+        self._width = width
+        
+    def calculate(self, depth: float = 1):
+        return (self._length * self._width * self.__mass * depth) / 1000
+    
+road = Road(20, 5000)
+calculation = road.calculate(5)
 
-    def mass(self):
-        return self._length * self._width
-
-
-class MassCount(Road):
-    def __init__(self, _length, _width, volume):
-        super().__init__(_length, _width)
-        self.volume = volume
-
-
-r = MassCount(25, 10000, 125)
-print(r.mass())
+print(f"{calculation} т")
 
 
 
