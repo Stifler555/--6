@@ -221,40 +221,25 @@ Handle (маркер). В каждом из классов реализоват�
 
 
 class Stationary:
-    def __init__(self, title):
-        self.title = title
+    title: str
+    _message = "Запуск отрисовки."
 
     def draw(self):
-        return f'Запуск отрисовки {self.title}'
+        print(self._message)
 
 
 class Pen(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
-    def draw(self):
-        return f'Вы взяли {self.title}. Запуск отрисовки ручкой'
+    _message = "Рисуем ручкой."
 
 
 class Pencil(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
-
-    def draw(self):
-        return f'Вы взяли {self.title}. Запуск отрисовки карандашом'
+    _message = "Рисуем карандашом."
 
 
 class Handle(Stationary):
-    def __init__(self, title):
-        super().__init__(title)
+    _message = "Рисуем маркером."
 
-    def draw(self):
-        return f'Вы взяли {self.title}. Запуск отрисовки маркером'
+items = [Pen(), Pencil(), Handle()]
 
-
-pen = Pen('Ручка')
-pencil = Pencil('Карандаш')
-handle = Handle('Маркер')
-print(pen.draw())
-print(pencil.draw())
-print(handle.draw())
+for item in items:
+    item.draw()
